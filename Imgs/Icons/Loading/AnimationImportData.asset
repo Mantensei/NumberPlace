@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f919a430518ee74c94e80b1602d4f44, type: 3}
+  m_Name: AnimationImportData
+  m_EditorClassIdentifier: 
+  Enabled: 0
+  autoGenerateAnimation: 0
+  clipDataList:
+  - name: 01
+    loop: 1
+  pixelsPerUnit: 64
+  spriteWidth: 128
+  frameRate: 60
+  frameWeight: 20
+  removeStr:
+  - ' '
+  - _
+  - .
+  useOriginalTextureSetting: 1
+  spriteMeshType: 0
+  filterMode: 0
+  textureCompression: 0
+  maxTextureSize: 2048
+  textureFormat: 4
+  textureResizeAlgorithm: 1

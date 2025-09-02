@@ -1,0 +1,112 @@
+/* =========================
+   カラーパレット（草原：4色制）
+   ========================= */
+:root {
+    --color-bg-black: #2c4a52;  /* 背景 */
+    --color-bg-dark:  #537072;  /* バナー */
+    --color-bg-light: #8e9b97;  /* 上下パネル */
+    --color-bg-white: #f4ebdb;  /* セル */
+
+    --color-text-main:   #0f1b07;
+    --color-text-subtle: #5a6a58;
+    --color-accent:      #88c070;
+
+    --size-button:       52px;
+    --font-button:       64px;
+    --font-default:      32px;
+
+    --spacing-none:      0px;
+    --spacing-small:     4px;
+    --spacing-large:     16px;
+
+    --radius-none:       0px;
+}
+
+/* =========================
+   ルート構造とレイアウト
+   ========================= */
+.game-root {
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding: var(--spacing-small);
+    /* background-color: var(--color-bg-black); */
+    font-size: var(--font-default);
+}
+
+/* =========================
+   汎用パネルスペース
+   ========================= */
+.panel {
+    /* 汎用背景などを追加するならここ */
+}
+
+.banner-space {
+    height: 32px;
+    background-color: var(--color-bg-dark);
+}
+
+.pad-space {
+    height: 128px;
+    background-color: var(--color-bg-light);
+}
+
+.canvas-space {
+    height: 632px;
+    background-color: var(--color-bg-white);
+}
+
+/* =========================
+   上部情報パネル
+   ========================= */
+.info-panel {
+    height: 32px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-bg-dark);
+    border-radius: var(--radius-none);
+}
+
+.info-label {
+    color: var(--color-text-main);
+}
+
+/* =========================
+   入力パッド（共通）
+   ========================= */
+.input-panel {
+    height: 128px;
+    flex-direction: column;
+    background-color: var(--color-bg-light);
+    border-radius: var(--radius-none);
+}
+
+.number-row,
+.control-row {
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* =========================
+   各ボタンスタイル
+   ========================= */
+.number-button,
+.control-button {
+    height: var(--size-button);
+    width: var(--size-button);
+    min-width: 40px;
+    padding: var(--spacing-none);
+    font-size: var(--font-button);
+    border-radius: var(--radius-none);
+    border-width: 0px;
+    color: var(--color-text-main);
+    background-color: var(--color-bg-light);
+}
+
+.control-button {
+    background-color: var(--color-bg-dark);
+    margin: var(--spacing-small) var(--spacing-large);
+}
+

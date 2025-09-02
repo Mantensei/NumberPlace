@@ -1,0 +1,39 @@
+﻿<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/NumberPlace/UI/USS/GameUI.uss?fileID=7433441132597879392&amp;guid=233d5bab939a36c4297c134a4c376eeb&amp;type=3#GameUI" />
+    <ui:VisualElement name="root" class="game-root">
+        <ui:VisualElement name="info-panel" class="banner-space panel">
+            <ui:VisualElement name="info-panel" class="info-panel">
+        <ui:Label name="score-label" text="score:000000" class="info-label" />
+        <ui:Label name="time-label" text="00:00" class="info-label" />
+        <ui:Label name="mistake-label" text="ミス ×0" class="info-label" />
+    </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="picture-panel" class="pad-space panel">
+            <ui:Label tabindex="-1" text="picture"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="canvas-placeholder" class="canvas-space panel">
+            <ui:Label tabindex="-1" text="canvas"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="input-panel" class="pad-space panel">
+        <ui:VisualElement name="control-row" class="control-row">
+          <ui:Button name="memo-toggle" text="✎" class="control-button" />
+          <ui:Button name="undo-button" text="←" class="control-button" />
+          <ui:Button name="redo-button" text="＠" class="control-button" />
+        <ui:Button name="hint-button" text="🔦" class="control-button" />
+    </ui:VisualElement>
+                <ui:VisualElement name="number-row" class="number-row">
+          <ui:Button name="btn-1" text="1" class="number-button" />
+          <ui:Button name="btn-2" text="2" class="number-button" />
+          <ui:Button name="btn-3" text="3" class="number-button" />
+          <ui:Button name="btn-4" text="4" class="number-button" />
+          <ui:Button name="btn-5" text="5" class="number-button" />
+          <ui:Button name="btn-6" text="6" class="number-button" />
+          <ui:Button name="btn-7" text="7" class="number-button" />
+          <ui:Button name="btn-8" text="8" class="number-button" />
+          <ui:Button name="btn-9" text="9" class="number-button" />
+          <ui:Button name="btn-clear" text="×" class="number-button" />
+        </ui:VisualElement>
+
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,30 @@
+﻿<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEditor.UIElements"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ui:VisualElement name="input-panel" class="input-panel">
+
+    <ui:VisualElement name="control-row" class="control-row">
+      <ui:Button name="memo-toggle" text="✎" class="control-button" />
+      <ui:Button name="undo-button" text="←" class="control-button" />
+      <ui:Button name="redo-button" text="＠" class="control-button" />
+        <ui:Button name="hint-button" text="💡" class="control-button" />
+
+    </ui:VisualElement>
+
+    <ui:VisualElement name="number-row" class="number-row">
+      <ui:Button name="btn-1" text="1" class="number-button" />
+      <ui:Button name="btn-2" text="2" class="number-button" />
+      <ui:Button name="btn-3" text="3" class="number-button" />
+      <ui:Button name="btn-4" text="4" class="number-button" />
+      <ui:Button name="btn-5" text="5" class="number-button" />
+      <ui:Button name="btn-6" text="6" class="number-button" />
+      <ui:Button name="btn-7" text="7" class="number-button" />
+      <ui:Button name="btn-8" text="8" class="number-button" />
+      <ui:Button name="btn-9" text="9" class="number-button" />
+      <ui:Button name="btn-clear" text="×" class="number-button" />
+    </ui:VisualElement>
+
+
+
+  </ui:VisualElement>
+</ui:UXML>
