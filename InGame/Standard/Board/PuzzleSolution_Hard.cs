@@ -1,4 +1,4 @@
-using MantenseiLib;
+ï»¿using MantenseiLib;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +15,13 @@ namespace NumberPlace.Standard
             UpdateAllCandidates();
             List<PuzzleCell> updatedCells = new List<PuzzleCell>();
 
-            // s‚Æ—ñ‚Ì—¼•û‚ÅX-Wing‚ğƒ`ƒFƒbƒN
+            // è¡Œã¨åˆ—ã®ä¸¡æ–¹ã§X-Wingã‚’ãƒã‚§ãƒƒã‚¯
             for (int indexType = 0; indexType <= 1; indexType++)
             {
                 IndexType primary = (IndexType)indexType;
                 IndexType secondary = indexType == 0 ? IndexType.Column : IndexType.Row;
 
-                // Še”š‚É‚Â‚¢‚Äˆ—
+                // å„æ•°å­—ã«ã¤ã„ã¦å‡¦ç†
                 for (int num = 0; num < Size; num++)
                 {
                     FindXWing(num, primary, secondary, updatedCells);
@@ -33,7 +33,7 @@ namespace NumberPlace.Standard
 
         private void FindXWing(int num, IndexType primary, IndexType secondary, List<PuzzleCell> updatedCells)
         {
-            // Šes/—ñ‚ğŠm”F‚µA“Á’è‚Ì”š‚ÌŒó•â‚ğ‚ÂƒZƒ‹‚ÌˆÊ’u‚ğ‹L˜^
+            // å„è¡Œ/åˆ—ã‚’ç¢ºèªã—ã€ç‰¹å®šã®æ•°å­—ã®å€™è£œã‚’æŒã¤ã‚»ãƒ«ã®ä½ç½®ã‚’è¨˜éŒ²
             var positions = new Dictionary<int, List<int>>();
 
             for (int i = 0; i < Size; i++)
@@ -43,28 +43,28 @@ namespace NumberPlace.Standard
 
                 var secondaryPositions = cells.Select(c => c.IndexOfAddress((int)secondary)).ToList();
 
-                // ‚±‚Ì”š‚ÌŒó•â‚ª2‚Â‚¾‚¯‚ ‚és/—ñ‚¾‚¯‚ğ‹L˜^
+                // ã“ã®æ•°å­—ã®å€™è£œãŒ2ã¤ã ã‘ã‚ã‚‹è¡Œ/åˆ—ã ã‘ã‚’è¨˜éŒ²
                 if (secondaryPositions.Count == 2)
                 {
                     positions[i] = secondaryPositions;
                 }
             }
 
-            // X-Wing ƒpƒ^[ƒ“‚ğ’T‚·
+            // X-Wing ãƒ‘ã‚¿ãƒ¼ãƒ³ã‚’æ¢ã™
             foreach (var entry1 in positions)
             {
                 foreach (var entry2 in positions.Where(e => e.Key > entry1.Key))
                 {
-                    // 2‚Â‚Ìs/—ñ‚Å“¯‚¶—ñ/s‚ÉŒó•â‚ª‚ ‚éê‡
+                    // 2ã¤ã®è¡Œ/åˆ—ã§åŒã˜åˆ—/è¡Œã«å€™è£œãŒã‚ã‚‹å ´åˆ
                     if (entry1.Value.SequenceEqual(entry2.Value))
                     {
-                        // X-Wing ƒpƒ^[ƒ“‚ªŒ©‚Â‚©‚Á‚½
+                        // X-Wing ãƒ‘ã‚¿ãƒ¼ãƒ³ãŒè¦‹ã¤ã‹ã£ãŸ
                         int primary1 = entry1.Key;
                         int primary2 = entry2.Key;
                         int secondary1 = entry1.Value[0];
                         int secondary2 = entry1.Value[1];
 
-                        // “¯‚¶—ñ/s‚Ì‘¼‚ÌƒZƒ‹‚©‚çŒó•â‚ğœ‹
+                        // åŒã˜åˆ—/è¡Œã®ä»–ã®ã‚»ãƒ«ã‹ã‚‰å€™è£œã‚’é™¤å»
                         RemoveCandidateFromXWing(num, primary, secondary, primary1, primary2, secondary1, secondary2, updatedCells);
                     }
                 }
@@ -74,12 +74,12 @@ namespace NumberPlace.Standard
         private void RemoveCandidateFromXWing(int num, IndexType primary, IndexType secondary,
             int primary1, int primary2, int secondary1, int secondary2, List<PuzzleCell> updatedCells)
         {
-            // 2‚Â‚Ì—ñ/s‚©‚çŒó•â‚ğœ‹
+            // 2ã¤ã®åˆ—/è¡Œã‹ã‚‰å€™è£œã‚’é™¤å»
             for (int i = 0; i < Size; i++)
             {
-                if (i != primary1 && i != primary2)  // X-Wing‚Ì4‹÷ˆÈŠO
+                if (i != primary1 && i != primary2)  // X-Wingã®4éš…ä»¥å¤–
                 {
-                    // secondary1‚Ì—ñ/s‚©‚çœ‹
+                    // secondary1ã®åˆ—/è¡Œã‹ã‚‰é™¤å»
                     var cell1 = _cloneBoard.FirstOrDefault(c =>
                         c.IndexOfAddress((int)primary) == i &&
                         c.IndexOfAddress((int)secondary) == secondary1 &&
@@ -93,7 +93,7 @@ namespace NumberPlace.Standard
                             updatedCells.Add(cell1);
                     }
 
-                    // secondary2‚Ì—ñ/s‚©‚çœ‹
+                    // secondary2ã®åˆ—/è¡Œã‹ã‚‰é™¤å»
                     var cell2 = _cloneBoard.FirstOrDefault(c =>
                         c.IndexOfAddress((int)primary) == i &&
                         c.IndexOfAddress((int)secondary) == secondary2 &&
@@ -110,28 +110,28 @@ namespace NumberPlace.Standard
             }
         }
 
-        // Y-Wing (XYZ-Wing“ÁêƒP[ƒX)
+        // Y-Wing (XYZ-Wingç‰¹æ®Šã‚±ãƒ¼ã‚¹)
         [NumberPlaceSolution(PuzzleSolutionDifficulty.Hard, PuzzleSolutionType.Func)]
         PuzzleCell[] YWing()
         {
             UpdateAllCandidates();
             List<PuzzleCell> updatedCells = new List<PuzzleCell>();
 
-            // ƒsƒ{ƒbƒg‚Æ‚È‚é‰Â”\«‚Ì‚ ‚éƒZƒ‹‚ğŒŸõ (Œó•â‚ª2‚Â‚ÌƒZƒ‹)
+            // ãƒ”ãƒœãƒƒãƒˆã¨ãªã‚‹å¯èƒ½æ€§ã®ã‚ã‚‹ã‚»ãƒ«ã‚’æ¤œç´¢ (å€™è£œãŒ2ã¤ã®ã‚»ãƒ«)
             var pivotCells = _cloneBoard.Where(c =>
                 c.State == PuzzleCellState.Empty &&
                 c.Candidates.Count == 2).ToArray();
 
             foreach (var pivot in pivotCells)
             {
-                // ƒsƒ{ƒbƒg‚Ì2‚Â‚ÌŒó•â‚ğæ“¾
+                // ãƒ”ãƒœãƒƒãƒˆã®2ã¤ã®å€™è£œã‚’å–å¾—
                 var pivotCandidates = pivot.Candidates.ToArray();
                 if (pivotCandidates.Length != 2) continue;
 
                 int x = pivotCandidates[0];
                 int y = pivotCandidates[1];
 
-                // ƒsƒ“ƒZƒ‹‚ğŒŸõ (xy, xz ‚ÌŒó•â‚ğ‚ÂƒZƒ‹)
+                // ãƒ”ãƒ³ã‚»ãƒ«ã‚’æ¤œç´¢ (xy, xz ã®å€™è£œã‚’æŒã¤ã‚»ãƒ«)
                 FindYWingPincers(pivot, x, y, updatedCells);
             }
 
@@ -140,37 +140,37 @@ namespace NumberPlace.Standard
 
         private void FindYWingPincers(PuzzleCell pivot, int x, int y, List<PuzzleCell> updatedCells)
         {
-            // ƒsƒ{ƒbƒg‚Æ‹¤—L‚·‚éƒZƒ‹ (sA—ñA‚Ü‚½‚ÍƒuƒƒbƒN)
+            // ãƒ”ãƒœãƒƒãƒˆã¨å…±æœ‰ã™ã‚‹ã‚»ãƒ« (è¡Œã€åˆ—ã€ã¾ãŸã¯ãƒ–ãƒ­ãƒƒã‚¯)
             var connectedCells = GetAroundCells(pivot).Where(c =>
                 c.State == PuzzleCellState.Empty &&
                 c.Candidates.Count == 2 &&
                 !c.Address.Equals(pivot.Address)).ToArray();
 
-            // x ‚ğŠÜ‚Şƒsƒ“ƒZƒ‹
+            // x ã‚’å«ã‚€ãƒ”ãƒ³ã‚»ãƒ«
             var xPincers = connectedCells.Where(c =>
                 c.Candidates.Contains(x) &&
                 !c.Candidates.Contains(y)).ToArray();
 
-            // y ‚ğŠÜ‚Şƒsƒ“ƒZƒ‹
+            // y ã‚’å«ã‚€ãƒ”ãƒ³ã‚»ãƒ«
             var yPincers = connectedCells.Where(c =>
                 c.Candidates.Contains(y) &&
                 !c.Candidates.Contains(x)).ToArray();
 
-            // ‘S‚Ä‚Ìƒsƒ“ƒZƒ‹‚Ì‘g‚İ‡‚í‚¹‚ğƒ`ƒFƒbƒN
+            // å…¨ã¦ã®ãƒ”ãƒ³ã‚»ãƒ«ã®çµ„ã¿åˆã‚ã›ã‚’ãƒã‚§ãƒƒã‚¯
             foreach (var xPincer in xPincers)
             {
-                int z = xPincer.Candidates.First(n => n != x);  // XZ ƒsƒ“ƒZƒ‹‚ÌZ’l
+                int z = xPincer.Candidates.First(n => n != x);  // XZ ãƒ”ãƒ³ã‚»ãƒ«ã®Zå€¤
 
                 foreach (var yPincer in yPincers)
                 {
-                    if (yPincer.Candidates.Contains(z))  // YZ ƒsƒ“ƒZƒ‹
+                    if (yPincer.Candidates.Contains(z))  // YZ ãƒ”ãƒ³ã‚»ãƒ«
                     {
-                        // Y-Wing ‚ªŒ©‚Â‚©‚Á‚½
-                        // xPincer‚ÆyPincer‚Ì—¼•û‚©‚çŒ©‚¦‚éƒZƒ‹‚©‚çz‚ğœ‹
+                        // Y-Wing ãŒè¦‹ã¤ã‹ã£ãŸ
+                        // xPincerã¨yPincerã®ä¸¡æ–¹ã‹ã‚‰è¦‹ãˆã‚‹ã‚»ãƒ«ã‹ã‚‰zã‚’é™¤å»
                         var xCells = GetAroundCells(xPincer);
                         var yCells = GetAroundCells(yPincer);
 
-                        // —¼•û‚©‚çŒ©‚¦‚éƒZƒ‹‚ğŒŸõ
+                        // ä¸¡æ–¹ã‹ã‚‰è¦‹ãˆã‚‹ã‚»ãƒ«ã‚’æ¤œç´¢
                         var commonCells = xCells.Intersect(yCells, new AddressEqualityComparer())
                             .Where(c =>
                                 c.State == PuzzleCellState.Empty &&
@@ -179,7 +179,7 @@ namespace NumberPlace.Standard
                                 !c.Address.Equals(xPincer.Address) &&
                                 !c.Address.Equals(yPincer.Address)).ToArray();
 
-                        // z ‚ğœ‹
+                        // z ã‚’é™¤å»
                         foreach (var cell in commonCells)
                         {
                             cell.Candidates.Remove(z);
@@ -198,13 +198,13 @@ namespace NumberPlace.Standard
             UpdateAllCandidates();
             List<PuzzleCell> updatedCells = new List<PuzzleCell>();
 
-            // s‚Æ—ñ‚Ì—¼•û‚ÅSwordfish‚ğƒ`ƒFƒbƒN
+            // è¡Œã¨åˆ—ã®ä¸¡æ–¹ã§Swordfishã‚’ãƒã‚§ãƒƒã‚¯
             for (int indexType = 0; indexType <= 1; indexType++)
             {
                 IndexType primary = (IndexType)indexType;
                 IndexType secondary = indexType == 0 ? IndexType.Column : IndexType.Row;
 
-                // Še”š‚É‚Â‚¢‚Äˆ—
+                // å„æ•°å­—ã«ã¤ã„ã¦å‡¦ç†
                 for (int num = 0; num < Size; num++)
                 {
                     FindSwordfish(num, primary, secondary, updatedCells);
@@ -216,7 +216,7 @@ namespace NumberPlace.Standard
 
         private void FindSwordfish(int num, IndexType primary, IndexType secondary, List<PuzzleCell> updatedCells)
         {
-            // Šes/—ñ‚ğŠm”F‚µA“Á’è‚Ì”š‚ÌŒó•â‚ğ‚ÂƒZƒ‹‚ÌˆÊ’u‚ğ‹L˜^
+            // å„è¡Œ/åˆ—ã‚’ç¢ºèªã—ã€ç‰¹å®šã®æ•°å­—ã®å€™è£œã‚’æŒã¤ã‚»ãƒ«ã®ä½ç½®ã‚’è¨˜éŒ²
             var positions = new Dictionary<int, List<int>>();
 
             for (int i = 0; i < Size; i++)
@@ -226,14 +226,14 @@ namespace NumberPlace.Standard
 
                 var secondaryPositions = cells.Select(c => c.IndexOfAddress((int)secondary)).ToList();
 
-                // ‚±‚Ì”š‚ÌŒó•â‚ª2‚Â‚©3‚Â‚ ‚és/—ñ‚¾‚¯‚ğ‹L˜^
+                // ã“ã®æ•°å­—ã®å€™è£œãŒ2ã¤ã‹3ã¤ã‚ã‚‹è¡Œ/åˆ—ã ã‘ã‚’è¨˜éŒ²
                 if (secondaryPositions.Count >= 2 && secondaryPositions.Count <= 3)
                 {
                     positions[i] = secondaryPositions;
                 }
             }
 
-            // 3‚Â‚Ìs/—ñ‚ğ‘I‚Ô‘S‚Ä‚Ì‘g‚İ‡‚í‚¹‚ğ‚·
+            // 3ã¤ã®è¡Œ/åˆ—ã‚’é¸ã¶å…¨ã¦ã®çµ„ã¿åˆã‚ã›ã‚’è©¦ã™
             var keys = positions.Keys.ToArray();
             for (int i = 0; i < keys.Length; i++)
             {
@@ -245,18 +245,18 @@ namespace NumberPlace.Standard
                         int key2 = keys[j];
                         int key3 = keys[k];
 
-                        // 3‚Â‚Ìs/—ñ‚ÌƒZƒ‹‚ÌˆÊ’u‚ğƒ}[ƒW
+                        // 3ã¤ã®è¡Œ/åˆ—ã®ã‚»ãƒ«ã®ä½ç½®ã‚’ãƒãƒ¼ã‚¸
                         var allPositions = new HashSet<int>();
                         allPositions.UnionWith(positions[key1]);
                         allPositions.UnionWith(positions[key2]);
                         allPositions.UnionWith(positions[key3]);
 
-                        // Swordfishƒpƒ^[ƒ“F3‚Â‚Ìs/—ñ‚Å‡Œv3‚Â‚Ì—ñ/s‚ÉŒó•â‚ª‚ ‚é
+                        // Swordfishãƒ‘ã‚¿ãƒ¼ãƒ³ï¼š3ã¤ã®è¡Œ/åˆ—ã§åˆè¨ˆ3ã¤ã®åˆ—/è¡Œã«å€™è£œãŒã‚ã‚‹
                         if (allPositions.Count == 3)
                         {
                             var secondaryPositions = allPositions.ToArray();
 
-                            // “¯‚¶—ñ/s‚Ì‘¼‚ÌƒZƒ‹‚©‚çŒó•â‚ğœ‹
+                            // åŒã˜åˆ—/è¡Œã®ä»–ã®ã‚»ãƒ«ã‹ã‚‰å€™è£œã‚’é™¤å»
                             RemoveCandidateFromSwordfish(num, primary, secondary,
                                 new[] { key1, key2, key3 }, secondaryPositions, updatedCells);
                         }
@@ -268,12 +268,12 @@ namespace NumberPlace.Standard
         private void RemoveCandidateFromSwordfish(int num, IndexType primary, IndexType secondary,
             int[] primaryKeys, int[] secondaryPositions, List<PuzzleCell> updatedCells)
         {
-            // 3‚Â‚Ì—ñ/s‚Ì3‚Â‚ÌŒó•â‚©‚çŒó•â‚ğœ‹
+            // 3ã¤ã®åˆ—/è¡Œã®3ã¤ã®å€™è£œã‹ã‚‰å€™è£œã‚’é™¤å»
             foreach (int secondaryPos in secondaryPositions)
             {
                 for (int i = 0; i < Size; i++)
                 {
-                    // Swordfish‚Ì9‹÷ˆÈŠO‚ÌƒZƒ‹‚©‚çŒó•â‚ğœ‹
+                    // Swordfishã®9éš…ä»¥å¤–ã®ã‚»ãƒ«ã‹ã‚‰å€™è£œã‚’é™¤å»
                     if (!primaryKeys.Contains(i))
                     {
                         var cell = _cloneBoard.FirstOrDefault(c =>
@@ -300,20 +300,20 @@ namespace NumberPlace.Standard
             UpdateAllCandidates();
             List<PuzzleCell> updatedCells = new List<PuzzleCell>();
 
-            // ƒsƒ{ƒbƒg‚Æ‚È‚é‰Â”\«‚Ì‚ ‚éƒZƒ‹‚ğŒŸõ (Œó•â‚ª3‚Â‚ÌƒZƒ‹)
+            // ãƒ”ãƒœãƒƒãƒˆã¨ãªã‚‹å¯èƒ½æ€§ã®ã‚ã‚‹ã‚»ãƒ«ã‚’æ¤œç´¢ (å€™è£œãŒ3ã¤ã®ã‚»ãƒ«)
             var pivotCells = _cloneBoard.Where(c =>
                 c.State == PuzzleCellState.Empty &&
                 c.Candidates.Count == 3).ToArray();
 
             foreach (var pivot in pivotCells)
             {
-                // ƒsƒ{ƒbƒg‚Ì3‚Â‚ÌŒó•â‚ğæ“¾
+                // ãƒ”ãƒœãƒƒãƒˆã®3ã¤ã®å€™è£œã‚’å–å¾—
                 var xyz = pivot.Candidates.ToArray();
                 if (xyz.Length != 3) continue;
 
                 for (int i = 0; i < 3; i++)
                 {
-                    int z = xyz[i];  // ‹¤’Ê‚ÌŒó•â
+                    int z = xyz[i];  // å…±é€šã®å€™è£œ
                     int x = xyz[(i + 1) % 3];
                     int y = xyz[(i + 2) % 3];
 
@@ -326,36 +326,36 @@ namespace NumberPlace.Standard
 
         private void FindXYZWingPincers(PuzzleCell pivot, int x, int y, int z, List<PuzzleCell> updatedCells)
         {
-            // ƒsƒ{ƒbƒg‚Æ‹¤—L‚·‚éƒZƒ‹ (sA—ñA‚Ü‚½‚ÍƒuƒƒbƒN)
+            // ãƒ”ãƒœãƒƒãƒˆã¨å…±æœ‰ã™ã‚‹ã‚»ãƒ« (è¡Œã€åˆ—ã€ã¾ãŸã¯ãƒ–ãƒ­ãƒƒã‚¯)
             var connectedCells = GetAroundCells(pivot).Where(c =>
                 c.State == PuzzleCellState.Empty &&
                 c.Candidates.Count == 2 &&
                 !c.Address.Equals(pivot.Address)).ToArray();
 
-            // x, z ‚ğŠÜ‚Şƒsƒ“ƒZƒ‹
+            // x, z ã‚’å«ã‚€ãƒ”ãƒ³ã‚»ãƒ«
             var xzPincers = connectedCells.Where(c =>
                 c.Candidates.Contains(x) &&
                 c.Candidates.Contains(z) &&
                 !c.Candidates.Contains(y)).ToArray();
 
-            // y, z ‚ğŠÜ‚Şƒsƒ“ƒZƒ‹
+            // y, z ã‚’å«ã‚€ãƒ”ãƒ³ã‚»ãƒ«
             var yzPincers = connectedCells.Where(c =>
                 c.Candidates.Contains(y) &&
                 c.Candidates.Contains(z) &&
                 !c.Candidates.Contains(x)).ToArray();
 
-            // ‘S‚Ä‚Ìƒsƒ“ƒZƒ‹‚Ì‘g‚İ‡‚í‚¹‚ğƒ`ƒFƒbƒN
+            // å…¨ã¦ã®ãƒ”ãƒ³ã‚»ãƒ«ã®çµ„ã¿åˆã‚ã›ã‚’ãƒã‚§ãƒƒã‚¯
             foreach (var xzPincer in xzPincers)
             {
                 foreach (var yzPincer in yzPincers)
                 {
-                    // XYZ-Wing ‚ªŒ©‚Â‚©‚Á‚½
-                    // 3‚Â‚ÌƒZƒ‹ (pivot, xzPincer, yzPincer) ‘S‚Ä‚©‚çŒ©‚¦‚éƒZƒ‹‚©‚çz‚ğœ‹
+                    // XYZ-Wing ãŒè¦‹ã¤ã‹ã£ãŸ
+                    // 3ã¤ã®ã‚»ãƒ« (pivot, xzPincer, yzPincer) å…¨ã¦ã‹ã‚‰è¦‹ãˆã‚‹ã‚»ãƒ«ã‹ã‚‰zã‚’é™¤å»
                     var pivotCells = GetAroundCells(pivot);
                     var xzCells = GetAroundCells(xzPincer);
                     var yzCells = GetAroundCells(yzPincer);
 
-                    // 3‚Â‚ÌƒZƒ‹‘S‚Ä‚©‚çŒ©‚¦‚éƒZƒ‹‚ğŒŸõ
+                    // 3ã¤ã®ã‚»ãƒ«å…¨ã¦ã‹ã‚‰è¦‹ãˆã‚‹ã‚»ãƒ«ã‚’æ¤œç´¢
                     var commonCells = pivotCells
                         .Intersect(xzCells, new AddressEqualityComparer())
                         .Intersect(yzCells, new AddressEqualityComparer())
@@ -366,7 +366,7 @@ namespace NumberPlace.Standard
                             !c.Address.Equals(xzPincer.Address) &&
                             !c.Address.Equals(yzPincer.Address)).ToArray();
 
-                    // z ‚ğœ‹
+                    // z ã‚’é™¤å»
                     foreach (var cell in commonCells)
                     {
                         cell.Candidates.Remove(z);
@@ -378,7 +378,7 @@ namespace NumberPlace.Standard
         }
     }
 
-    // ƒAƒhƒŒƒX‚Å”äŠr‚·‚é‚½‚ß‚ÌƒRƒ“ƒpƒŒ[ƒ^[ƒNƒ‰ƒX
+    // ã‚¢ãƒ‰ãƒ¬ã‚¹ã§æ¯”è¼ƒã™ã‚‹ãŸã‚ã®ã‚³ãƒ³ãƒ‘ãƒ¬ãƒ¼ã‚¿ãƒ¼ã‚¯ãƒ©ã‚¹
     public class AddressEqualityComparer : IEqualityComparer<PuzzleCell>
     {
         public bool Equals(PuzzleCell x, PuzzleCell y)

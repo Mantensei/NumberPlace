@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,7 +75,7 @@ namespace NumberPlace.Standard
     {
         PuzzleCell[] _cells;
         public PuzzleCell[] Cells => _cells;
-        // ‰Â‹ƒZƒ‹ˆê——iƒVƒƒƒbƒtƒ‹Ï‚İj
+        // å¯è¦–ã‚»ãƒ«ä¸€è¦§ï¼ˆã‚·ãƒ£ãƒƒãƒ•ãƒ«æ¸ˆã¿ï¼‰
         public IEnumerable<PuzzleCell> GetRandomVisibleCells()
             => _cells.Where(c => c.State == PuzzleCellState.Open).Shuffle();
 
@@ -142,7 +142,7 @@ namespace NumberPlace.Standard
 
                 if (attr.Type == PuzzleSolutionType.Predicate)
                 {
-                    // ƒfƒŠƒQ[ƒg‚É•ÏŠ·iƒ‰ƒ€ƒ_‚Åthis‚ğŒÅ’èj
+                    // ãƒ‡ãƒªã‚²ãƒ¼ãƒˆã«å¤‰æ›ï¼ˆãƒ©ãƒ ãƒ€ã§thisã‚’å›ºå®šï¼‰
                     Func<PuzzleCell, bool> predicate = (PuzzleCell cell) =>
                     {
                         return (bool)method.Invoke(this, new object[] { cell });
@@ -151,7 +151,7 @@ namespace NumberPlace.Standard
                 }
                 else if (attr.Type == PuzzleSolutionType.Func)
                 {
-                    // ƒfƒŠƒQ[ƒg‚É•ÏŠ·iƒ‰ƒ€ƒ_‚Åthis‚ğŒÅ’èj
+                    // ãƒ‡ãƒªã‚²ãƒ¼ãƒˆã«å¤‰æ›ï¼ˆãƒ©ãƒ ãƒ€ã§thisã‚’å›ºå®šï¼‰
                     Func<PuzzleCell[]> func = () =>
                     {
                         return (PuzzleCell[])method.Invoke(this, null);

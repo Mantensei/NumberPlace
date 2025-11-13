@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using NumberPlace.Standard;
@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace NumberPlace.Undo
 {
-    // Undoƒ}ƒl[ƒWƒƒ[
+    // Undoãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
     public class UndoManager : SingletonMonoBehaviour<UndoManager>
     {
         private Stack<ICommand> undoStack = new Stack<ICommand>();
@@ -24,10 +24,10 @@ namespace NumberPlace.Undo
             command.Execute();
             undoStack.Push(command);
 
-            // Redo—š—ğ‚ğƒNƒŠƒA
+            // Redoå±¥æ­´ã‚’ã‚¯ãƒªã‚¢
             redoStack.Clear();
 
-            // Å‘å”‚ğ’´‚¦‚½ê‡‚ÍŒÃ‚¢‚à‚Ì‚ğíœ
+            // æœ€å¤§æ•°ã‚’è¶…ãˆãŸå ´åˆã¯å¤ã„ã‚‚ã®ã‚’å‰Šé™¤
             if (undoStack.Count > maxUndoSteps)
             {
                 var temp = new Stack<ICommand>();
@@ -69,19 +69,19 @@ namespace NumberPlace.Undo
             redoStack.Clear();
         }
 
-        // ƒfƒoƒbƒO—p
+        // ãƒ‡ãƒãƒƒã‚°ç”¨
         public int UndoCount => undoStack.Count;
         public int RedoCount => redoStack.Count;
     }
 
-    // ƒRƒ}ƒ“ƒh‚ÌŠî‘bƒCƒ“ƒ^[ƒtƒF[ƒX
+    // ã‚³ãƒãƒ³ãƒ‰ã®åŸºç¤ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
     public interface ICommand
     {
         void Execute();
         void Undo();
     }
 
-    // ƒZƒ‹‘€ì‚ÌŠî‘bƒNƒ‰ƒX
+    // ã‚»ãƒ«æ“ä½œã®åŸºç¤ã‚¯ãƒ©ã‚¹
     public abstract class CellCommand : ICommand
     {
         protected Cell targetCell;
@@ -107,7 +107,7 @@ namespace NumberPlace.Undo
         }
     }
 
-    // ƒZƒ‹‚Ìƒƒ‚ó‘Ô‚ğ‹L˜^‚·‚éƒNƒ‰ƒX
+    // ã‚»ãƒ«ã®ãƒ¡ãƒ¢çŠ¶æ…‹ã‚’è¨˜éŒ²ã™ã‚‹ã‚¯ãƒ©ã‚¹
     public class CellMemoSnapshot
     {
         public Cell Cell { get; set; }
@@ -130,7 +130,7 @@ namespace NumberPlace.Undo
         }
     }
 
-    // ”šİ’è‚ÌƒRƒ}ƒ“ƒhiüˆÍ‚Ìƒƒ‚íœ‚àŠÜ‚Şj
+    // æ•°å­—è¨­å®šã®ã‚³ãƒãƒ³ãƒ‰ï¼ˆå‘¨å›²ã®ãƒ¡ãƒ¢å‰Šé™¤ã‚‚å«ã‚€ï¼‰
     public class SetNumberCommand : CellCommand
     {
         private readonly int previousValue;
@@ -139,19 +139,19 @@ namespace NumberPlace.Undo
 
         public SetNumberCommand(Cell cell, int value) : base(cell, value)
         {
-            // Às‘O‚Ìó‘Ô‚ğ‹L˜^
+            // å®Ÿè¡Œå‰ã®çŠ¶æ…‹ã‚’è¨˜éŒ²
             var numberView = cell.GetView().GetComponent<NumberView>();
             previousValue = numberView?.Value ?? -1;
             previousState = cell.State();
 
-            // üˆÍ‚ÌƒZƒ‹‚Ìƒƒ‚ó‘Ô‚ğ–‘O‚É‹L˜^
+            // å‘¨å›²ã®ã‚»ãƒ«ã®ãƒ¡ãƒ¢çŠ¶æ…‹ã‚’äº‹å‰ã«è¨˜éŒ²
             affectedMemoSnapshots = new List<CellMemoSnapshot>();
             RecordAffectedMemos();
         }
 
         private void RecordAffectedMemos()
         {
-            // ÀÛ‚É³‰ğ‚É‚È‚éê‡‚Ì‚İAüˆÍ‚Ìƒƒ‚ó‘Ô‚ğ‹L˜^
+            // å®Ÿéš›ã«æ­£è§£ã«ãªã‚‹å ´åˆã®ã¿ã€å‘¨å›²ã®ãƒ¡ãƒ¢çŠ¶æ…‹ã‚’è¨˜éŒ²
             if (value >= 0 && value == targetCell.GetValue())
             {
                 var aroundCells = targetCell.GetAroundCells();
@@ -160,7 +160,7 @@ namespace NumberPlace.Undo
                     var memoView = cell.GetComponentInChildren<MemoView>();
                     if (memoView != null && memoView.MemoState != null && memoView.MemoState.Length > value && memoView.MemoState[value])
                     {
-                        // ‚±‚ÌƒZƒ‹‚Ìƒƒ‚‚ª‰e‹¿‚ğó‚¯‚éê‡‚Ì‚İ‹L˜^
+                        // ã“ã®ã‚»ãƒ«ã®ãƒ¡ãƒ¢ãŒå½±éŸ¿ã‚’å—ã‘ã‚‹å ´åˆã®ã¿è¨˜éŒ²
                         affectedMemoSnapshots.Add(new CellMemoSnapshot(cell));
                     }
                 }
@@ -174,18 +174,18 @@ namespace NumberPlace.Undo
 
         public override void Undo()
         {
-            // ‚Ü‚¸”š‚ğŒ³‚É–ß‚·
+            // ã¾ãšæ•°å­—ã‚’å…ƒã«æˆ»ã™
             if (previousValue >= 0)
             {
                 SendInstruction(InstructionType.SetNum, previousValue);
             }
             else
             {
-                // ‹óƒZƒ‹‚É–ß‚·
+                // ç©ºã‚»ãƒ«ã«æˆ»ã™
                 SendInstruction(InstructionType.SetNum, -1, InstructionOption.Empty);
             }
 
-            // ‰e‹¿‚ğó‚¯‚½ƒƒ‚‚ğ•œŒ³
+            // å½±éŸ¿ã‚’å—ã‘ãŸãƒ¡ãƒ¢ã‚’å¾©å…ƒ
             foreach (var snapshot in affectedMemoSnapshots)
             {
                 snapshot.Restore();
@@ -193,14 +193,14 @@ namespace NumberPlace.Undo
         }
     }
 
-    // ƒƒ‚•ÏX‚ÌƒRƒ}ƒ“ƒh
+    // ãƒ¡ãƒ¢å¤‰æ›´ã®ã‚³ãƒãƒ³ãƒ‰
     public class MemoCommand : CellCommand
     {
         private readonly bool[] previousMemoState;
 
         public MemoCommand(Cell cell, int memoNum) : base(cell, memoNum)
         {
-            // Às‘O‚Ìƒƒ‚ó‘Ô‚ğ‹L˜^
+            // å®Ÿè¡Œå‰ã®ãƒ¡ãƒ¢çŠ¶æ…‹ã‚’è¨˜éŒ²
             var memoView = cell.GetComponentInChildren<MemoView>();
             previousMemoState = memoView?.MemoState;
         }
@@ -220,7 +220,7 @@ namespace NumberPlace.Undo
         }
     }
 
-    // ƒZƒ‹ó‘Ô‚ÌƒXƒiƒbƒvƒVƒ‡ƒbƒg
+    // ã‚»ãƒ«çŠ¶æ…‹ã®ã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆ
     public class CellSnapshot
     {
         public int NumberValue { get; set; } = -1;
@@ -249,7 +249,7 @@ namespace NumberPlace.Undo
 
         public void RestoreToCell(Cell cell)
         {
-            // ”’l‚Ì•œŒ³
+            // æ•°å€¤ã®å¾©å…ƒ
             if (NumberValue >= 0)
             {
                 cell.ReceiveInfo(new StandardRule_Instruction
@@ -268,7 +268,7 @@ namespace NumberPlace.Undo
                 });
             }
 
-            // ƒƒ‚‚Ì•œŒ³
+            // ãƒ¡ãƒ¢ã®å¾©å…ƒ
             if (MemoState != null)
             {
                 var memoView = cell.GetComponentInChildren<MemoView>();
@@ -277,7 +277,7 @@ namespace NumberPlace.Undo
         }
     }
 
-    // ‚æ‚è”Ä—p“I‚ÈƒZƒ‹ƒRƒ}ƒ“ƒh
+    // ã‚ˆã‚Šæ±ç”¨çš„ãªã‚»ãƒ«ã‚³ãƒãƒ³ãƒ‰
     public class GenericCellCommand : ICommand
     {
         private readonly Cell targetCell;
@@ -302,7 +302,7 @@ namespace NumberPlace.Undo
         }
     }
 
-    // •¡”‘€ì‚ğ‚Ü‚Æ‚ß‚éƒRƒ}ƒ“ƒhiƒƒ‚‘Sİ’è‚È‚Çj
+    // è¤‡æ•°æ“ä½œã‚’ã¾ã¨ã‚ã‚‹ã‚³ãƒãƒ³ãƒ‰ï¼ˆãƒ¡ãƒ¢å…¨è¨­å®šãªã©ï¼‰
     public class CompositeCommand : ICommand
     {
         private List<ICommand> commands = new List<ICommand>();
@@ -322,7 +322,7 @@ namespace NumberPlace.Undo
 
         public void Undo()
         {
-            // ‹t‡‚ÅUndo ‚ğÀs
+            // é€†é †ã§Undo ã‚’å®Ÿè¡Œ
             for (int i = commands.Count - 1; i >= 0; i--)
             {
                 commands[i].Undo();
@@ -330,12 +330,12 @@ namespace NumberPlace.Undo
         }
     }
 
-    // ƒtƒ@ƒNƒgƒŠƒNƒ‰ƒXF“KØ‚ÈƒRƒ}ƒ“ƒh‚ğ¶¬
+    // ãƒ•ã‚¡ã‚¯ãƒˆãƒªã‚¯ãƒ©ã‚¹ï¼šé©åˆ‡ãªã‚³ãƒãƒ³ãƒ‰ã‚’ç”Ÿæˆ
     public static class CommandFactory
     {
         public static ICommand CreateCommand(Cell cell, StandardRule_Instruction instruction)
         {
-            // “Á’è‚ÌƒRƒ}ƒ“ƒh‚ğg‚¢‚½‚¢ê‡
+            // ç‰¹å®šã®ã‚³ãƒãƒ³ãƒ‰ã‚’ä½¿ã„ãŸã„å ´åˆ
             switch (instruction.type)
             {
                 case InstructionType.SetNum:
@@ -348,7 +348,7 @@ namespace NumberPlace.Undo
         }
     }
 
-    // íœƒRƒ}ƒ“ƒhiƒZƒ‹‚ğ‹ó‚É‚·‚éj
+    // å‰Šé™¤ã‚³ãƒãƒ³ãƒ‰ï¼ˆã‚»ãƒ«ã‚’ç©ºã«ã™ã‚‹ï¼‰
     public class DeleteCommand : ICommand
     {
         private readonly Cell targetCell;

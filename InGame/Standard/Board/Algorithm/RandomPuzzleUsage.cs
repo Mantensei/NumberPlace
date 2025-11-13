@@ -1,4 +1,4 @@
-//using System.Collections;
+ï»¿//using System.Collections;
 //using System.Collections.Generic;
 //using UnityEngine;
 //using MantenseiLib;
@@ -11,10 +11,10 @@
 //{
 //    [SerializeField] private RandomPuzzleGenerator puzzleGenerator;
 //    [SerializeField] private int targetHints = 25;
-//    [SerializeField] private int timeoutSeconds = 60; // ƒ^ƒCƒ€ƒAƒEƒgi•bj
-//    [SerializeField] private bool useMultiThreading = true; // ƒ}ƒ‹ƒ`ƒXƒŒƒbƒh‚ğg—p‚·‚é‚©
+//    [SerializeField] private int timeoutSeconds = 60; // ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆï¼ˆç§’ï¼‰
+//    [SerializeField] private bool useMultiThreading = true; // ãƒãƒ«ãƒã‚¹ãƒ¬ãƒƒãƒ‰ã‚’ä½¿ç”¨ã™ã‚‹ã‹
 
-//    // UIƒRƒ“ƒ|[ƒlƒ“ƒgi•K—v‚É‰‚¶‚Ä’Ç‰Áj
+//    // UIã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆï¼ˆå¿…è¦ã«å¿œã˜ã¦è¿½åŠ ï¼‰
 //    [SerializeField] private TextMeshProUGUI statusText;
 //    [SerializeField] private TextMeshProUGUI hintCountText;
 //    [SerializeField] private UnityEngine.UI.Button generateButton;
@@ -24,13 +24,13 @@
 
 //    private void Start()
 //    {
-//        // •K—v‚É‰‚¶‚ÄRandomPuzzleGenerator‚ğì¬
+//        // å¿…è¦ã«å¿œã˜ã¦RandomPuzzleGeneratorã‚’ä½œæˆ
 //        if (puzzleGenerator == null)
 //        {
 //            //puzzleGenerator = gameObject.AddComponent<RandomPuzzleGenerator>();
 //        }
 
-//        // ƒ{ƒ^ƒ“‚ÌƒŠƒXƒi[‚ğİ’èiUI‚ª‚ ‚éê‡j
+//        // ãƒœã‚¿ãƒ³ã®ãƒªã‚¹ãƒŠãƒ¼ã‚’è¨­å®šï¼ˆUIãŒã‚ã‚‹å ´åˆï¼‰
 //        if (generateButton != null)
 //        {
 //            generateButton.onClick.AddListener(StartPuzzleGeneration);
@@ -49,55 +49,55 @@
 //        }
 //    }
 
-//    // “¯Šú“I‚ÉƒpƒYƒ‹‚ğ¶¬iUI‚ªƒuƒƒbƒN‚³‚ê‚é‰Â”\«‚ ‚èj
+//    // åŒæœŸçš„ã«ãƒ‘ã‚ºãƒ«ã‚’ç”Ÿæˆï¼ˆUIãŒãƒ–ãƒ­ãƒƒã‚¯ã•ã‚Œã‚‹å¯èƒ½æ€§ã‚ã‚Šï¼‰
 //    private void GeneratePuzzle()
 //    {
-//        UpdateStatus("ƒpƒYƒ‹¶¬’†...");
+//        UpdateStatus("ãƒ‘ã‚ºãƒ«ç”Ÿæˆä¸­...");
         
-//        // ¶¬ŠJnŠÔ
+//        // ç”Ÿæˆé–‹å§‹æ™‚é–“
 //        DateTime startTime = DateTime.Now;
         
-//        // ƒpƒYƒ‹¶¬
+//        // ãƒ‘ã‚ºãƒ«ç”Ÿæˆ
 //        try
 //        {
 //            int[][] puzzleGrid = puzzleGenerator.GenerateMinimalPuzzle();
 //            currentPuzzle = puzzleGenerator.CreatePuzzleGenerator();
 
-//            // Œ‹‰Ê•\¦
+//            // çµæœè¡¨ç¤º
 //            int hintCount = CountHints(puzzleGrid);
-//            UpdateStatus($"ƒpƒYƒ‹¶¬Š®—¹! ƒqƒ“ƒg”: {hintCount}");
+//            UpdateStatus($"ãƒ‘ã‚ºãƒ«ç”Ÿæˆå®Œäº†! ãƒ’ãƒ³ãƒˆæ•°: {hintCount}");
 //            UpdateHintCount(hintCount);
             
-//            // ƒpƒYƒ‹‚ğƒQ[ƒ€‚É“K—p
+//            // ãƒ‘ã‚ºãƒ«ã‚’ã‚²ãƒ¼ãƒ ã«é©ç”¨
 //            ApplyPuzzleToGame(currentPuzzle);
 //        }
 //        catch (Exception e)
 //        {
-//            UpdateStatus($"ƒGƒ‰[: {e.Message}");
-//            Debug.LogError($"ƒpƒYƒ‹¶¬ƒGƒ‰[: {e}");
+//            UpdateStatus($"ã‚¨ãƒ©ãƒ¼: {e.Message}");
+//            Debug.LogError($"ãƒ‘ã‚ºãƒ«ç”Ÿæˆã‚¨ãƒ©ãƒ¼: {e}");
 //        }
 //    }
 
-//    // ”ñ“¯Šú‚ÅƒpƒYƒ‹‚ğ¶¬iUIƒuƒƒbƒN‚ğ–h‚®j
+//    // éåŒæœŸã§ãƒ‘ã‚ºãƒ«ã‚’ç”Ÿæˆï¼ˆUIãƒ–ãƒ­ãƒƒã‚¯ã‚’é˜²ãï¼‰
 //    private IEnumerator GeneratePuzzleAsync()
 //    {
-//        UpdateStatus("ƒpƒYƒ‹¶¬’†...");
+//        UpdateStatus("ãƒ‘ã‚ºãƒ«ç”Ÿæˆä¸­...");
         
-//        // ƒLƒƒƒ“ƒZƒŒ[ƒVƒ‡ƒ“ƒg[ƒNƒ“‚ğì¬
+//        // ã‚­ãƒ£ãƒ³ã‚»ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ãƒˆãƒ¼ã‚¯ãƒ³ã‚’ä½œæˆ
 //        if (cancellationToken != null)
 //        {
 //            cancellationToken.Cancel();
 //        }
 //        cancellationToken = new System.Threading.CancellationTokenSource();
         
-//        // ¶¬ŠJnŠÔ
+//        // ç”Ÿæˆé–‹å§‹æ™‚é–“
 //        DateTime startTime = DateTime.Now;
         
-//        // ƒoƒbƒNƒOƒ‰ƒEƒ“ƒhƒXƒŒƒbƒh‚ÅƒpƒYƒ‹‚ğ¶¬
+//        // ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¹ãƒ¬ãƒƒãƒ‰ã§ãƒ‘ã‚ºãƒ«ã‚’ç”Ÿæˆ
 //        int[][] puzzleGrid = null;
 //        Exception error = null;
         
-//        // ƒXƒŒƒbƒhƒv[ƒ‹‚ÅÀs
+//        // ã‚¹ãƒ¬ãƒƒãƒ‰ãƒ—ãƒ¼ãƒ«ã§å®Ÿè¡Œ
 //        bool isComplete = false;
 //        System.Threading.ThreadPool.QueueUserWorkItem(_ => 
 //        {
@@ -113,63 +113,63 @@
 //            }
 //        });
         
-//        // Š®—¹‚Ü‚½‚Íƒ^ƒCƒ€ƒAƒEƒg‚Ü‚Å‘Ò‹@
+//        // å®Œäº†ã¾ãŸã¯ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã¾ã§å¾…æ©Ÿ
 //        while (!isComplete)
 //        {
-//            // ƒ^ƒCƒ€ƒAƒEƒgƒ`ƒFƒbƒN
+//            // ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆãƒã‚§ãƒƒã‚¯
 //            if ((DateTime.Now - startTime).TotalSeconds > timeoutSeconds)
 //            {
 //                cancellationToken.Cancel();
-//                UpdateStatus("ƒ^ƒCƒ€ƒAƒEƒg: ¶¬‚ÉŠÔ‚ª‚©‚©‚è‚·‚¬‚Ä‚¢‚Ü‚·");
+//                UpdateStatus("ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆ: ç”Ÿæˆã«æ™‚é–“ãŒã‹ã‹ã‚Šã™ãã¦ã„ã¾ã™");
 //                yield break;
 //            }
             
-//            // isó‹µ‚ÌXVi—áFŒo‰ßŠÔj
+//            // é€²è¡ŒçŠ¶æ³ã®æ›´æ–°ï¼ˆä¾‹ï¼šçµŒéæ™‚é–“ï¼‰
 //            float elapsedSeconds = (float)(DateTime.Now - startTime).TotalSeconds;
-//            UpdateStatus($"ƒpƒYƒ‹¶¬’†... ({elapsedSeconds:F1}•bŒo‰ß)");
+//            UpdateStatus($"ãƒ‘ã‚ºãƒ«ç”Ÿæˆä¸­... ({elapsedSeconds:F1}ç§’çµŒé)");
             
 //            yield return new WaitForSeconds(0.2f);
 //        }
         
-//        // ƒGƒ‰[ƒ`ƒFƒbƒN
+//        // ã‚¨ãƒ©ãƒ¼ãƒã‚§ãƒƒã‚¯
 //        if (error != null)
 //        {
-//            UpdateStatus($"ƒGƒ‰[: {error.Message}");
-//            Debug.LogError($"ƒpƒYƒ‹¶¬ƒGƒ‰[: {error}");
+//            UpdateStatus($"ã‚¨ãƒ©ãƒ¼: {error.Message}");
+//            Debug.LogError($"ãƒ‘ã‚ºãƒ«ç”Ÿæˆã‚¨ãƒ©ãƒ¼: {error}");
 //            yield break;
 //        }
         
-//        // Œ‹‰Ê‚ğˆ—
+//        // çµæœã‚’å‡¦ç†
 //        try
 //        {
 //            currentPuzzle = puzzleGenerator.CreatePuzzleGenerator();
             
 //            int hintCount = CountHints(puzzleGrid);
-//            UpdateStatus($"ƒpƒYƒ‹¶¬Š®—¹! ƒqƒ“ƒg”: {hintCount}");
+//            UpdateStatus($"ãƒ‘ã‚ºãƒ«ç”Ÿæˆå®Œäº†! ãƒ’ãƒ³ãƒˆæ•°: {hintCount}");
 //            UpdateHintCount(hintCount);
             
-//            // ƒpƒYƒ‹‚ğƒQ[ƒ€‚É“K—p
+//            // ãƒ‘ã‚ºãƒ«ã‚’ã‚²ãƒ¼ãƒ ã«é©ç”¨
 //            ApplyPuzzleToGame(currentPuzzle);
 //        }
 //        catch (Exception e)
 //        {
-//            UpdateStatus($"ƒGƒ‰[: {e.Message}");
-//            Debug.LogError($"Œ‹‰Êˆ—ƒGƒ‰[: {e}");
+//            UpdateStatus($"ã‚¨ãƒ©ãƒ¼: {e.Message}");
+//            Debug.LogError($"çµæœå‡¦ç†ã‚¨ãƒ©ãƒ¼: {e}");
 //        }
 //    }
 
-//    // ƒpƒYƒ‹‚ğƒQ[ƒ€‚É“K—p‚·‚éi•K—v‚É‰‚¶‚ÄÀ‘•j
+//    // ãƒ‘ã‚ºãƒ«ã‚’ã‚²ãƒ¼ãƒ ã«é©ç”¨ã™ã‚‹ï¼ˆå¿…è¦ã«å¿œã˜ã¦å®Ÿè£…ï¼‰
 //    private void ApplyPuzzleToGame(PuzzleGenerator puzzle)
 //    {
-//        // ‚±‚±‚ÉA¶¬‚³‚ê‚½ƒpƒYƒ‹‚ğƒQ[ƒ€ƒ{[ƒh‚É“K—p‚·‚éƒR[ƒh‚ğ‹Lq
-//        // —áFƒQ[ƒ€ƒ}ƒl[ƒWƒƒ[‚ÉƒpƒYƒ‹‚ğ“n‚·AƒZƒ‹‚ğXV‚·‚éA‚È‚Ç
-//        Debug.Log("V‚µ‚¢ƒpƒYƒ‹‚ªƒQ[ƒ€‚É“K—p‚³‚ê‚Ü‚µ‚½");
+//        // ã“ã“ã«ã€ç”Ÿæˆã•ã‚ŒãŸãƒ‘ã‚ºãƒ«ã‚’ã‚²ãƒ¼ãƒ ãƒœãƒ¼ãƒ‰ã«é©ç”¨ã™ã‚‹ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°
+//        // ä¾‹ï¼šã‚²ãƒ¼ãƒ ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«ãƒ‘ã‚ºãƒ«ã‚’æ¸¡ã™ã€ã‚»ãƒ«ã‚’æ›´æ–°ã™ã‚‹ã€ãªã©
+//        Debug.Log("æ–°ã—ã„ãƒ‘ã‚ºãƒ«ãŒã‚²ãƒ¼ãƒ ã«é©ç”¨ã•ã‚Œã¾ã—ãŸ");
         
-//        // ƒfƒ‚FƒpƒYƒ‹‚ğƒfƒoƒbƒOƒƒO‚É•\¦
+//        // ãƒ‡ãƒ¢ï¼šãƒ‘ã‚ºãƒ«ã‚’ãƒ‡ãƒãƒƒã‚°ãƒ­ã‚°ã«è¡¨ç¤º
 //        puzzleGenerator.PrintGrid(GetPuzzleGridFromGenerator(puzzle));
 //    }
 
-//    // PuzzleGenerator‚©‚ç“ñŸŒ³”z—ñ‚ğæ“¾
+//    // PuzzleGeneratorã‹ã‚‰äºŒæ¬¡å…ƒé…åˆ—ã‚’å–å¾—
 //    private int[][] GetPuzzleGridFromGenerator(PuzzleGenerator generator)
 //    {
 //        int size = generator.Size;
@@ -184,18 +184,18 @@
 //        {
 //            if (cell.IsVisible)
 //            {
-//                grid[cell.Y][cell.X] = cell.Num + 1; // 0-indexed‚ğ1-indexed‚É•ÏŠ·
+//                grid[cell.Y][cell.X] = cell.Num + 1; // 0-indexedã‚’1-indexedã«å¤‰æ›
 //            }
 //            else
 //            {
-//                grid[cell.Y][cell.X] = 0; // ‹ó‚ÌƒZƒ‹
+//                grid[cell.Y][cell.X] = 0; // ç©ºã®ã‚»ãƒ«
 //            }
 //        }
         
 //        return grid;
 //    }
 
-//    // ƒqƒ“ƒg”‚ğ”‚¦‚é
+//    // ãƒ’ãƒ³ãƒˆæ•°ã‚’æ•°ãˆã‚‹
 //    private int CountHints(int[][] grid)
 //    {
 //        int count = 0;
@@ -212,7 +212,7 @@
 //        return count;
 //    }
 
-//    // ƒXƒe[ƒ^ƒXƒeƒLƒXƒg‚ğXV
+//    // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ†ã‚­ã‚¹ãƒˆã‚’æ›´æ–°
 //    private void UpdateStatus(string message)
 //    {
 //        if (statusText != null)
@@ -222,18 +222,18 @@
 //        Debug.Log(message);
 //    }
 
-//    // ƒqƒ“ƒg”ƒeƒLƒXƒg‚ğXV
+//    // ãƒ’ãƒ³ãƒˆæ•°ãƒ†ã‚­ã‚¹ãƒˆã‚’æ›´æ–°
 //    private void UpdateHintCount(int count)
 //    {
 //        if (hintCountText != null)
 //        {
-//            hintCountText.text = $"ƒqƒ“ƒg”: {count}";
+//            hintCountText.text = $"ãƒ’ãƒ³ãƒˆæ•°: {count}";
 //        }
 //    }
 
 //    private void OnDestroy()
 //    {
-//        // ƒLƒƒƒ“ƒZƒŒ[ƒVƒ‡ƒ“ƒg[ƒNƒ“‚ğƒNƒŠ[ƒ“ƒAƒbƒv
+//        // ã‚­ãƒ£ãƒ³ã‚»ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ãƒˆãƒ¼ã‚¯ãƒ³ã‚’ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ—
 //        if (cancellationToken != null)
 //        {
 //            cancellationToken.Cancel();

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +9,8 @@ using Random = UnityEngine.Random;
 namespace NumberPlace.Standard
 {
     /// <summary>
-    /// ƒrƒbƒg‰‰ZÅ“K‰»”Å”“ÆƒpƒYƒ‹¶¬‹@
-    /// Œó•â”šŠÇ—‚Éƒrƒbƒg‰‰Z‚ğg—p‚µA‚‘¬‰»‚ğÀŒ»
+    /// ãƒ“ãƒƒãƒˆæ¼”ç®—æœ€é©åŒ–ç‰ˆæ•°ç‹¬ãƒ‘ã‚ºãƒ«ç”Ÿæˆæ©Ÿ
+    /// å€™è£œæ•°å­—ç®¡ç†ã«ãƒ“ãƒƒãƒˆæ¼”ç®—ã‚’ä½¿ç”¨ã—ã€é«˜é€ŸåŒ–ã‚’å®Ÿç¾
     /// </summary>
     public class RandomPuzzleGenerator
     {
@@ -30,11 +30,11 @@ namespace NumberPlace.Standard
         public int BlockSize { get; private set; }
         public int Size => (int)Mathf.Pow(BlockSize, 2);
 
-        // ƒrƒbƒg‰‰Z—p‚Ì’è”‚Æƒ}ƒXƒN
-        private int _fullMask; // ‘S‚Ä‚Ì”š‚ª—˜—p‰Â”\‚Èó‘Ô‚Ìƒ}ƒXƒN
-        private int[] _numberMasks; // Še”š‚É‘Î‰‚·‚éƒrƒbƒgƒ}ƒXƒN
+        // ãƒ“ãƒƒãƒˆæ¼”ç®—ç”¨ã®å®šæ•°ã¨ãƒã‚¹ã‚¯
+        private int _fullMask; // å…¨ã¦ã®æ•°å­—ãŒåˆ©ç”¨å¯èƒ½ãªçŠ¶æ…‹ã®ãƒã‚¹ã‚¯
+        private int[] _numberMasks; // å„æ•°å­—ã«å¯¾å¿œã™ã‚‹ãƒ“ãƒƒãƒˆãƒã‚¹ã‚¯
 
-        // ‚‘¬‰»—p‚Ì§–ñƒe[ƒuƒ‹
+        // é«˜é€ŸåŒ–ç”¨ã®åˆ¶ç´„ãƒ†ãƒ¼ãƒ–ãƒ«
         private int[] _rowConstraints;
         private int[] _colConstraints;
         private int[] _blockConstraints;
@@ -45,7 +45,7 @@ namespace NumberPlace.Standard
         public string ProgressStatus { get; private set; } = "";
         public float ProgressPercentage { get; private set; } = 0f;
 
-        private int _operationsPerFrame = 150000; // ƒrƒbƒg‰‰Z‚É‚æ‚è‚‘¬‰»‚³‚ê‚é‚½‚ß‘—Ê
+        private int _operationsPerFrame = 150000; // ãƒ“ãƒƒãƒˆæ¼”ç®—ã«ã‚ˆã‚Šé«˜é€ŸåŒ–ã•ã‚Œã‚‹ãŸã‚å¢—é‡
 
         public RandomPuzzleGenerator(int blockSize = 3, int targetHints = 25, bool allowMultipleSolutions = false)
         {
@@ -58,17 +58,17 @@ namespace NumberPlace.Standard
 
         private void InitializeBitMasks()
         {
-            // 1‚©‚çSize‚Ü‚Å‚Ì”š‚É‘Î‰‚·‚éƒrƒbƒgƒ}ƒXƒN‚ğì¬
+            // 1ã‹ã‚‰Sizeã¾ã§ã®æ•°å­—ã«å¯¾å¿œã™ã‚‹ãƒ“ãƒƒãƒˆãƒã‚¹ã‚¯ã‚’ä½œæˆ
             _numberMasks = new int[Size + 1];
             for (int i = 1; i <= Size; i++)
             {
                 _numberMasks[i] = 1 << (i - 1);
             }
 
-            // ‘S‚Ä‚Ì”š‚ªg—p‰Â”\‚Èó‘Ô‚Ìƒ}ƒXƒN
+            // å…¨ã¦ã®æ•°å­—ãŒä½¿ç”¨å¯èƒ½ãªçŠ¶æ…‹ã®ãƒã‚¹ã‚¯
             _fullMask = (1 << Size) - 1;
 
-            // §–ñƒe[ƒuƒ‹‚Ì‰Šú‰»
+            // åˆ¶ç´„ãƒ†ãƒ¼ãƒ–ãƒ«ã®åˆæœŸåŒ–
             _rowConstraints = new int[Size];
             _colConstraints = new int[Size];
             _blockConstraints = new int[Size];
@@ -76,52 +76,52 @@ namespace NumberPlace.Standard
 
         public IEnumerator GenerateMinimalPuzzleCoroutine(Action onComplete = null)
         {
-            // Debug.Log($"V‚µ‚¢”“ÆƒpƒYƒ‹‚ğ¶¬‚µ‚Ü‚·...i–Ú•Wƒqƒ“ƒg”F{targetHints}j");
+            // Debug.Log($"æ–°ã—ã„æ•°ç‹¬ãƒ‘ã‚ºãƒ«ã‚’ç”Ÿæˆã—ã¾ã™...ï¼ˆç›®æ¨™ãƒ’ãƒ³ãƒˆæ•°ï¼š{targetHints}ï¼‰");
             IsRunning = true;
             ProgressPercentage = 0f;
 
-            // 1. Š®‘S‰ğ¶¬
-            ProgressStatus = "Š®‘S‰ğ‚ğ¶¬’†...";
+            // 1. å®Œå…¨è§£ç”Ÿæˆ
+            ProgressStatus = "å®Œå…¨è§£ã‚’ç”Ÿæˆä¸­...";
             yield return GenerateFullSolutionCoroutine();
             ProgressPercentage = 30f;
 
-            // 2. ƒpƒYƒ‹¶¬
+            // 2. ãƒ‘ã‚ºãƒ«ç”Ÿæˆ
             if (allowMultipleSolutions)
             {
-                ProgressStatus = "ƒpƒYƒ‹‚ğ¶¬’†i•¡”‰ğ‹–‰Âj...";
+                ProgressStatus = "ãƒ‘ã‚ºãƒ«ã‚’ç”Ÿæˆä¸­ï¼ˆè¤‡æ•°è§£è¨±å¯ï¼‰...";
                 yield return GenerateWithMultipleSolutionsCoroutine();
             }
             else
             {
-                ProgressStatus = "ƒpƒYƒ‹‚ğ¶¬’†iˆêˆÓ‰ğ•ÛØj...";
+                ProgressStatus = "ãƒ‘ã‚ºãƒ«ã‚’ç”Ÿæˆä¸­ï¼ˆä¸€æ„è§£ä¿è¨¼ï¼‰...";
                 yield return GenerateWithUniqueSolutionCoroutine();
             }
 
-            ProgressStatus = "¶¬Š®—¹I";
+            ProgressStatus = "ç”Ÿæˆå®Œäº†ï¼";
             ProgressPercentage = 100f;
             IsRunning = false;
             onComplete?.Invoke();
         }
 
 
-        // GenerateFullSolutionCoroutine()ƒƒ\ƒbƒh‚ÌÅŒã‚ÉˆÈ‰º‚ğ’Ç‰Á
+        // GenerateFullSolutionCoroutine()ãƒ¡ã‚½ãƒƒãƒ‰ã®æœ€å¾Œã«ä»¥ä¸‹ã‚’è¿½åŠ 
         private IEnumerator GenerateFullSolutionCoroutine()
         {
-            ProgressStatus = "Š®‘S‰ğ‚ÌƒOƒŠƒbƒh‚ğ‰Šú‰»’†...";
+            ProgressStatus = "å®Œå…¨è§£ã®ã‚°ãƒªãƒƒãƒ‰ã‚’åˆæœŸåŒ–ä¸­...";
             _solvedGrid = new int[Size][];
             for (int i = 0; i < Size; i++)
             {
                 _solvedGrid[i] = new int[Size];
             }
 
-            ProgressStatus = "Š®‘S‰ğ‚ğŒvZ’†...";
+            ProgressStatus = "å®Œå…¨è§£ã‚’è¨ˆç®—ä¸­...";
             var solver = new OptimizedStateMachineSolver(this);
             yield return solver.SolveCoroutine(_solvedGrid);
 
-            ProgressStatus = "”š‚ğƒVƒƒƒbƒtƒ‹’†...";
+            ProgressStatus = "æ•°å­—ã‚’ã‚·ãƒ£ãƒƒãƒ•ãƒ«ä¸­...";
             ShuffleNumbers(_solvedGrid);
 
-            ProgressStatus = "Š®‘S‰ğ‚Ì¶¬Š®—¹";
+            ProgressStatus = "å®Œå…¨è§£ã®ç”Ÿæˆå®Œäº†";
         }
 
         private IEnumerator GenerateWithUniqueSolutionCoroutine()
@@ -137,8 +137,8 @@ namespace NumberPlace.Standard
                 yield return SinglePassRemovalCoroutine();
             }
 
-            ProgressStatus = $"ƒpƒYƒ‹¶¬Š®—¹ - ÅIƒqƒ“ƒg”: {CountHints(_puzzleGrid)}";
-            // Debug.Log($"ÅIƒqƒ“ƒg”: {CountHints(_puzzleGrid)}");
+            ProgressStatus = $"ãƒ‘ã‚ºãƒ«ç”Ÿæˆå®Œäº† - æœ€çµ‚ãƒ’ãƒ³ãƒˆæ•°: {CountHints(_puzzleGrid)}";
+            // Debug.Log($"æœ€çµ‚ãƒ’ãƒ³ãƒˆæ•°: {CountHints(_puzzleGrid)}");
         }
 
         private IEnumerator MultiplePassRemovalCoroutine()
@@ -149,7 +149,7 @@ namespace NumberPlace.Standard
 
             for (int attempt = 0; attempt < maxRemovalAttempts; attempt++)
             {
-                ProgressStatus = $"íœƒpƒX {attempt + 1}/{maxRemovalAttempts}...";
+                ProgressStatus = $"å‰Šé™¤ãƒ‘ã‚¹ {attempt + 1}/{maxRemovalAttempts}...";
                 int removedInThisPass = 0;
 
                 List<Vector2Int> cellPositions = new List<Vector2Int>();
@@ -183,7 +183,7 @@ namespace NumberPlace.Standard
                     {
                         removedInThisPass++;
                         // if (LogEnabled)
-                        //     Debug.Log($"ƒpƒX{attempt + 1}: ƒZƒ‹ ({row},{col}) íœ¬Œ÷BŒ»İƒqƒ“ƒg”: {CountHints(_puzzleGrid)}");
+                        //     Debug.Log($"ãƒ‘ã‚¹{attempt + 1}: ã‚»ãƒ« ({row},{col}) å‰Šé™¤æˆåŠŸã€‚ç¾åœ¨ãƒ’ãƒ³ãƒˆæ•°: {CountHints(_puzzleGrid)}");
                     }
                     else
                     {
@@ -195,9 +195,9 @@ namespace NumberPlace.Standard
                     ProgressPercentage = baseProgress + (progressRange * totalOperations / maxTotalOperations);
 
                     int currentHints = CountHints(_puzzleGrid);
-                    ProgressStatus = $"ƒpƒX {attempt + 1}/{maxRemovalAttempts} - Œ»İƒqƒ“ƒg”: {currentHints}, –Ú•W: {targetHints}";
+                    ProgressStatus = $"ãƒ‘ã‚¹ {attempt + 1}/{maxRemovalAttempts} - ç¾åœ¨ãƒ’ãƒ³ãƒˆæ•°: {currentHints}, ç›®æ¨™: {targetHints}";
 
-                    if (totalOperations % 15 == 0) // ƒrƒbƒg‰‰Z‚‘¬‰»‚É‚æ‚è•p“x‚ğã‚°‚é
+                    if (totalOperations % 15 == 0) // ãƒ“ãƒƒãƒˆæ¼”ç®—é«˜é€ŸåŒ–ã«ã‚ˆã‚Šé »åº¦ã‚’ä¸Šã’ã‚‹
                     {
                         onRunning?.Invoke();
                         yield return null;
@@ -205,17 +205,17 @@ namespace NumberPlace.Standard
 
                     if (currentHints <= targetHints)
                     {
-                        ProgressStatus = $"–Ú•W’B¬Iƒqƒ“ƒg”: {currentHints}";
-                        // Debug.Log($"–Ú•W’B¬: ƒqƒ“ƒg” = {currentHints}, ƒpƒX = {attempt + 1}");
+                        ProgressStatus = $"ç›®æ¨™é”æˆï¼ãƒ’ãƒ³ãƒˆæ•°: {currentHints}";
+                        // Debug.Log($"ç›®æ¨™é”æˆ: ãƒ’ãƒ³ãƒˆæ•° = {currentHints}, ãƒ‘ã‚¹ = {attempt + 1}");
                         break;
                     }
                 }
 
-                // Debug.Log($"ƒpƒX {attempt + 1} Š®—¹: {removedInThisPass} ƒZƒ‹íœ");
+                // Debug.Log($"ãƒ‘ã‚¹ {attempt + 1} å®Œäº†: {removedInThisPass} ã‚»ãƒ«å‰Šé™¤");
 
                 if (removedInThisPass == 0)
                 {
-                    // Debug.Log($"ƒpƒX {attempt + 1} ‚Åíœ‚³‚ê‚½ƒZƒ‹‚ª‚È‚¢‚½‚ßA‘ŠúI—¹");
+                    // Debug.Log($"ãƒ‘ã‚¹ {attempt + 1} ã§å‰Šé™¤ã•ã‚ŒãŸã‚»ãƒ«ãŒãªã„ãŸã‚ã€æ—©æœŸçµ‚äº†");
                     break;
                 }
             }
@@ -234,7 +234,7 @@ namespace NumberPlace.Standard
             }
             cellPositions = cellPositions.OrderBy(x => Random.value).ToList();
 
-            ProgressStatus = $"ƒZƒ‹‚ğíœ’†... –Ú•Wƒqƒ“ƒg”: {targetHints}";
+            ProgressStatus = $"ã‚»ãƒ«ã‚’å‰Šé™¤ä¸­... ç›®æ¨™ãƒ’ãƒ³ãƒˆæ•°: {targetHints}";
             int processedCells = 0;
             int removedCells = 0;
             var uniquenessChecker = new OptimizedUniquenessChecker(this);
@@ -257,7 +257,7 @@ namespace NumberPlace.Standard
                 {
                     removedCells++;
                     // if (LogEnabled)
-                    //     Debug.Log($"ƒZƒ‹ ({row},{col}) íœ¬Œ÷Bƒqƒ“ƒg”: {CountHints(_puzzleGrid)}");
+                    //     Debug.Log($"ã‚»ãƒ« ({row},{col}) å‰Šé™¤æˆåŠŸã€‚ãƒ’ãƒ³ãƒˆæ•°: {CountHints(_puzzleGrid)}");
                 }
                 else
                 {
@@ -268,7 +268,7 @@ namespace NumberPlace.Standard
                 float progressRange = 70f;
                 ProgressPercentage = baseProgress + (progressRange * processedCells / totalCells);
                 int currentHints = CountHints(_puzzleGrid);
-                ProgressStatus = $"ƒZƒ‹íœ’†... {processedCells}/{totalCells} (íœÏ‚İ: {removedCells}, Œ»İƒqƒ“ƒg”: {currentHints})";
+                ProgressStatus = $"ã‚»ãƒ«å‰Šé™¤ä¸­... {processedCells}/{totalCells} (å‰Šé™¤æ¸ˆã¿: {removedCells}, ç¾åœ¨ãƒ’ãƒ³ãƒˆæ•°: {currentHints})";
 
                 if (processedCells % 15 == 0)
                 {
@@ -278,8 +278,8 @@ namespace NumberPlace.Standard
 
                 if (currentHints <= targetHints)
                 {
-                    ProgressStatus = $"–Ú•W’B¬Iƒqƒ“ƒg”: {currentHints}";
-                    // Debug.Log($"–Ú•W’B¬: ƒqƒ“ƒg” = {currentHints}");
+                    ProgressStatus = $"ç›®æ¨™é”æˆï¼ãƒ’ãƒ³ãƒˆæ•°: {currentHints}";
+                    // Debug.Log($"ç›®æ¨™é”æˆ: ãƒ’ãƒ³ãƒˆæ•° = {currentHints}");
                     break;
                 }
             }
@@ -300,7 +300,7 @@ namespace NumberPlace.Standard
             }
             cellPositions = cellPositions.OrderBy(x => Random.value).ToList();
 
-            ProgressStatus = $"ƒZƒ‹‚ğíœ’†... –Ú•Wƒqƒ“ƒg”: {targetHints} (•¡”‰ğ‹–‰Â)";
+            ProgressStatus = $"ã‚»ãƒ«ã‚’å‰Šé™¤ä¸­... ç›®æ¨™ãƒ’ãƒ³ãƒˆæ•°: {targetHints} (è¤‡æ•°è§£è¨±å¯)";
             int processedCells = 0;
             int removedCells = 0;
             var solver = new OptimizedStateMachineSolver(this);
@@ -333,7 +333,7 @@ namespace NumberPlace.Standard
                 float progressRange = 70f;
                 ProgressPercentage = baseProgress + (progressRange * processedCells / totalCells);
                 int currentHints = CountHints(_puzzleGrid);
-                ProgressStatus = $"ƒZƒ‹íœ’†... {processedCells}/{totalCells} (íœÏ‚İ: {removedCells}, Œ»İƒqƒ“ƒg”: {currentHints})";
+                ProgressStatus = $"ã‚»ãƒ«å‰Šé™¤ä¸­... {processedCells}/{totalCells} (å‰Šé™¤æ¸ˆã¿: {removedCells}, ç¾åœ¨ãƒ’ãƒ³ãƒˆæ•°: {currentHints})";
 
                 if (processedCells % 15 == 0)
                 {
@@ -343,32 +343,32 @@ namespace NumberPlace.Standard
 
                 if (currentHints <= targetHints)
                 {
-                    ProgressStatus = $"–Ú•W’B¬Iƒqƒ“ƒg”: {currentHints}";
+                    ProgressStatus = $"ç›®æ¨™é”æˆï¼ãƒ’ãƒ³ãƒˆæ•°: {currentHints}";
                     break;
                 }
             }
 
-            ProgressStatus = $"ƒpƒYƒ‹¶¬Š®—¹ - ÅIƒqƒ“ƒg”: {CountHints(_puzzleGrid)}";
-            // Debug.Log($"ÅIƒqƒ“ƒg”: {CountHints(_puzzleGrid)}");
+            ProgressStatus = $"ãƒ‘ã‚ºãƒ«ç”Ÿæˆå®Œäº† - æœ€çµ‚ãƒ’ãƒ³ãƒˆæ•°: {CountHints(_puzzleGrid)}";
+            // Debug.Log($"æœ€çµ‚ãƒ’ãƒ³ãƒˆæ•°: {CountHints(_puzzleGrid)}");
         }
 
-        // V‚µ‚¢ƒƒ\ƒbƒh‚ğ’Ç‰Á
+        // æ–°ã—ã„ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¿½åŠ 
         /// <summary>
-        /// Š®¬‚µ‚½”Õ–Ê‚Ì”š‚ğƒ‰ƒ“ƒ_ƒ€‚ÉƒVƒƒƒbƒtƒ‹
+        /// å®Œæˆã—ãŸç›¤é¢ã®æ•°å­—ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«ã‚·ãƒ£ãƒƒãƒ•ãƒ«
         /// </summary>
         private void ShuffleNumbers(int[][] grid)
         {
-            // 1‚©‚çSize‚Ü‚Å‚Ì”š‚Ìƒ}ƒbƒsƒ“ƒOƒe[ƒuƒ‹‚ğì¬
-            int[] numberMapping = new int[Size + 1]; // ƒCƒ“ƒfƒbƒNƒX0‚Íg—p‚µ‚È‚¢
+            // 1ã‹ã‚‰Sizeã¾ã§ã®æ•°å­—ã®ãƒãƒƒãƒ”ãƒ³ã‚°ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ
+            int[] numberMapping = new int[Size + 1]; // ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹0ã¯ä½¿ç”¨ã—ãªã„
             List<int> shuffledNumbers = new List<int>();
 
-            // 1‚©‚çSize‚Ü‚Å‚Ì”š‚ğƒŠƒXƒg‚É’Ç‰Á
+            // 1ã‹ã‚‰Sizeã¾ã§ã®æ•°å­—ã‚’ãƒªã‚¹ãƒˆã«è¿½åŠ 
             for (int i = 1; i <= Size; i++)
             {
                 shuffledNumbers.Add(i);
             }
 
-            // ƒŠƒXƒg‚ğƒVƒƒƒbƒtƒ‹
+            // ãƒªã‚¹ãƒˆã‚’ã‚·ãƒ£ãƒƒãƒ•ãƒ«
             for (int i = shuffledNumbers.Count - 1; i > 0; i--)
             {
                 int randomIndex = Random.Range(0, i + 1);
@@ -377,13 +377,13 @@ namespace NumberPlace.Standard
                 shuffledNumbers[randomIndex] = temp;
             }
 
-            // ƒ}ƒbƒsƒ“ƒOƒe[ƒuƒ‹‚ğì¬
+            // ãƒãƒƒãƒ”ãƒ³ã‚°ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ
             for (int i = 0; i < Size; i++)
             {
                 numberMapping[i + 1] = shuffledNumbers[i];
             }
 
-            // ƒOƒŠƒbƒh‘S‘Ì‚Ì”š‚ğƒ}ƒbƒsƒ“ƒO‚É]‚Á‚Ä’u‚«Š·‚¦
+            // ã‚°ãƒªãƒƒãƒ‰å…¨ä½“ã®æ•°å­—ã‚’ãƒãƒƒãƒ”ãƒ³ã‚°ã«å¾“ã£ã¦ç½®ãæ›ãˆ
             for (int row = 0; row < Size; row++)
             {
                 for (int col = 0; col < Size; col++)
@@ -396,18 +396,18 @@ namespace NumberPlace.Standard
             }
 
             // if (LogEnabled)
-            //     Debug.Log($"”šƒVƒƒƒbƒtƒ‹Š®—¹: {string.Join(",", shuffledNumbers)}");
+            //     Debug.Log($"æ•°å­—ã‚·ãƒ£ãƒƒãƒ•ãƒ«å®Œäº†: {string.Join(",", shuffledNumbers)}");
         }
 
-        #region ƒ†[ƒeƒBƒŠƒeƒB
+        #region ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£
         /// <summary>
-        /// ƒrƒbƒg‰‰Z‚ğg‚Á‚½‚‘¬—LŒø«ƒ`ƒFƒbƒN
+        /// ãƒ“ãƒƒãƒˆæ¼”ç®—ã‚’ä½¿ã£ãŸé«˜é€Ÿæœ‰åŠ¹æ€§ãƒã‚§ãƒƒã‚¯
         /// </summary>
         public bool IsValidFast(int[][] grid, int row, int col, int num)
         {
             int mask = _numberMasks[num];
 
-            // sƒ`ƒFƒbƒNiƒrƒbƒg‰‰Zj
+            // è¡Œãƒã‚§ãƒƒã‚¯ï¼ˆãƒ“ãƒƒãƒˆæ¼”ç®—ï¼‰
             int rowMask = 0;
             for (int i = 0; i < Size; i++)
             {
@@ -416,7 +416,7 @@ namespace NumberPlace.Standard
             }
             if ((rowMask & mask) != 0) return false;
 
-            // —ñƒ`ƒFƒbƒNiƒrƒbƒg‰‰Zj
+            // åˆ—ãƒã‚§ãƒƒã‚¯ï¼ˆãƒ“ãƒƒãƒˆæ¼”ç®—ï¼‰
             int colMask = 0;
             for (int i = 0; i < Size; i++)
             {
@@ -425,7 +425,7 @@ namespace NumberPlace.Standard
             }
             if ((colMask & mask) != 0) return false;
 
-            // ƒuƒƒbƒNƒ`ƒFƒbƒNiƒrƒbƒg‰‰Zj
+            // ãƒ–ãƒ­ãƒƒã‚¯ãƒã‚§ãƒƒã‚¯ï¼ˆãƒ“ãƒƒãƒˆæ¼”ç®—ï¼‰
             int blockMask = 0;
             int blockRow = (row / BlockSize) * BlockSize;
             int blockCol = (col / BlockSize) * BlockSize;
@@ -444,29 +444,29 @@ namespace NumberPlace.Standard
         }
 
         /// <summary>
-        /// ƒZƒ‹‚Ì—˜—p‰Â”\‚È”š‚ğƒrƒbƒgƒ}ƒXƒN‚Åæ“¾
+        /// ã‚»ãƒ«ã®åˆ©ç”¨å¯èƒ½ãªæ•°å­—ã‚’ãƒ“ãƒƒãƒˆãƒã‚¹ã‚¯ã§å–å¾—
         /// </summary>
         public int GetAvailableNumbersMask(int[][] grid, int row, int col)
         {
-            if (grid[row][col] != 0) return 0; // Šù‚É”š‚ª“ü‚Á‚Ä‚¢‚é
+            if (grid[row][col] != 0) return 0; // æ—¢ã«æ•°å­—ãŒå…¥ã£ã¦ã„ã‚‹
 
             int usedMask = 0;
 
-            // s‚Ìg—pÏ‚İ”š
+            // è¡Œã®ä½¿ç”¨æ¸ˆã¿æ•°å­—
             for (int i = 0; i < Size; i++)
             {
                 if (grid[row][i] != 0)
                     usedMask |= _numberMasks[grid[row][i]];
             }
 
-            // —ñ‚Ìg—pÏ‚İ”š
+            // åˆ—ã®ä½¿ç”¨æ¸ˆã¿æ•°å­—
             for (int i = 0; i < Size; i++)
             {
                 if (grid[i][col] != 0)
                     usedMask |= _numberMasks[grid[i][col]];
             }
 
-            // ƒuƒƒbƒN‚Ìg—pÏ‚İ”š
+            // ãƒ–ãƒ­ãƒƒã‚¯ã®ä½¿ç”¨æ¸ˆã¿æ•°å­—
             int blockRow = (row / BlockSize) * BlockSize;
             int blockCol = (col / BlockSize) * BlockSize;
             for (int i = 0; i < BlockSize; i++)
@@ -478,11 +478,11 @@ namespace NumberPlace.Standard
                 }
             }
 
-            return _fullMask & (~usedMask); // —˜—p‰Â”\‚È”š‚Ìƒ}ƒXƒN
+            return _fullMask & (~usedMask); // åˆ©ç”¨å¯èƒ½ãªæ•°å­—ã®ãƒã‚¹ã‚¯
         }
 
         /// <summary>
-        /// ƒrƒbƒgƒ}ƒXƒN‚©‚ç”š‚ÌƒŠƒXƒg‚ğæ“¾
+        /// ãƒ“ãƒƒãƒˆãƒã‚¹ã‚¯ã‹ã‚‰æ•°å­—ã®ãƒªã‚¹ãƒˆã‚’å–å¾—
         /// </summary>
         public List<int> GetNumbersFromMask(int mask)
         {
@@ -498,7 +498,7 @@ namespace NumberPlace.Standard
         }
 
         /// <summary>
-        /// ƒrƒbƒgƒJƒEƒ“ƒgi—˜—p‰Â”\‚È”š‚ÌŒÂ”j
+        /// ãƒ“ãƒƒãƒˆã‚«ã‚¦ãƒ³ãƒˆï¼ˆåˆ©ç”¨å¯èƒ½ãªæ•°å­—ã®å€‹æ•°ï¼‰
         /// </summary>
         public int CountBits(int mask)
         {
@@ -506,7 +506,7 @@ namespace NumberPlace.Standard
             while (mask != 0)
             {
                 count++;
-                mask &= mask - 1; // Å‰ºˆÊƒrƒbƒg‚ğíœ
+                mask &= mask - 1; // æœ€ä¸‹ä½ãƒ“ãƒƒãƒˆã‚’å‰Šé™¤
             }
             return count;
         }
@@ -529,7 +529,7 @@ namespace NumberPlace.Standard
         }
 
         /// <summary>
-        /// Å‚à§–ñ‚ÌŒµ‚µ‚¢ƒZƒ‹‚ğŒ©‚Â‚¯‚éiMRV: Most Restricting Variablej
+        /// æœ€ã‚‚åˆ¶ç´„ã®å³ã—ã„ã‚»ãƒ«ã‚’è¦‹ã¤ã‘ã‚‹ï¼ˆMRV: Most Restricting Variableï¼‰
         /// </summary>
         public bool FindMostConstrainedCell(int[][] grid, ref int row, ref int col)
         {
@@ -552,7 +552,7 @@ namespace NumberPlace.Standard
                             col = c;
                             found = true;
 
-                            if (choices == 1) break; // Å‚à§–ñ‚ÌŒµ‚µ‚¢ƒZƒ‹‚ğ”­Œ©
+                            if (choices == 1) break; // æœ€ã‚‚åˆ¶ç´„ã®å³ã—ã„ã‚»ãƒ«ã‚’ç™ºè¦‹
                         }
                     }
                 }
@@ -587,9 +587,9 @@ namespace NumberPlace.Standard
         }
         #endregion
 
-        #region Å“K‰»‚³‚ê‚½ó‘Ô‹@ŠBÀ‘•
+        #region æœ€é©åŒ–ã•ã‚ŒãŸçŠ¶æ…‹æ©Ÿæ¢°å®Ÿè£…
         /// <summary>
-        /// ƒrƒbƒg‰‰ZÅ“K‰»”ÅƒoƒbƒNƒgƒ‰ƒbƒLƒ“ƒOó‘Ô‹@ŠB
+        /// ãƒ“ãƒƒãƒˆæ¼”ç®—æœ€é©åŒ–ç‰ˆãƒãƒƒã‚¯ãƒˆãƒ©ãƒƒã‚­ãƒ³ã‚°çŠ¶æ…‹æ©Ÿæ¢°
         /// </summary>
         private class OptimizedStateMachineSolver
         {
@@ -631,10 +631,10 @@ namespace NumberPlace.Standard
 
                     if (currentState.AvailableMask != 0)
                     {
-                        // Å‰‚Ì—˜—p‰Â”\‚È”š‚ğæ“¾
+                        // æœ€åˆã®åˆ©ç”¨å¯èƒ½ãªæ•°å­—ã‚’å–å¾—
                         int num = GetFirstAvailableNumber(currentState.AvailableMask);
 
-                        // ‚»‚Ì”š‚ğsÏ‚İ‚É‚·‚é
+                        // ãã®æ•°å­—ã‚’è©¦è¡Œæ¸ˆã¿ã«ã™ã‚‹
                         currentState.AvailableMask &= ~_generator._numberMasks[num];
 
                         if (_generator.IsValidFast(grid, currentState.Row, currentState.Col, num))
@@ -644,29 +644,29 @@ namespace NumberPlace.Standard
                             int nextRow = currentState.Row, nextCol = currentState.Col;
                             if (_generator.FindMostConstrainedCell(grid, ref nextRow, ref nextCol))
                             {
-                                // Œ»İ‚Ìó‘Ô‚ğ–ß‚·i‘¼‚Ì”š‚à‚·‚½‚ßj
+                                // ç¾åœ¨ã®çŠ¶æ…‹ã‚’æˆ»ã™ï¼ˆä»–ã®æ•°å­—ã‚‚è©¦ã™ãŸã‚ï¼‰
                                 _stateStack.Push(currentState);
 
-                                // Ÿ‚ÌƒZƒ‹‚Ìó‘Ô‚ğ’Ç‰Á
+                                // æ¬¡ã®ã‚»ãƒ«ã®çŠ¶æ…‹ã‚’è¿½åŠ 
                                 int nextAvailableMask = _generator.GetAvailableNumbersMask(grid, nextRow, nextCol);
                                 _stateStack.Push(new OptimizedSolverState(nextRow, nextCol, nextAvailableMask));
                             }
                             else
                             {
-                                // ‰ğŒˆŠ®—¹
+                                // è§£æ±ºå®Œäº†
                                 onComplete?.Invoke(true);
                                 yield break;
                             }
                         }
                         else
                         {
-                            // ‚±‚Ì”š‚Í–³ŒøAŸ‚Ì”š‚ğ‚·
+                            // ã“ã®æ•°å­—ã¯ç„¡åŠ¹ã€æ¬¡ã®æ•°å­—ã‚’è©¦ã™
                             _stateStack.Push(currentState);
                         }
                     }
                     else
                     {
-                        // ‚±‚ÌˆÊ’u‚Å‚Í‰ğŒˆ•s‰Â”\AƒoƒbƒNƒgƒ‰ƒbƒN
+                        // ã“ã®ä½ç½®ã§ã¯è§£æ±ºä¸å¯èƒ½ã€ãƒãƒƒã‚¯ãƒˆãƒ©ãƒƒã‚¯
                         grid[currentState.Row][currentState.Col] = 0;
                     }
                 }
@@ -700,7 +700,7 @@ namespace NumberPlace.Standard
         }
 
         /// <summary>
-        /// ƒrƒbƒg‰‰ZÅ“K‰»”ÅˆêˆÓ‰ğƒ`ƒFƒbƒN
+        /// ãƒ“ãƒƒãƒˆæ¼”ç®—æœ€é©åŒ–ç‰ˆä¸€æ„è§£ãƒã‚§ãƒƒã‚¯
         /// </summary>
         private class OptimizedUniquenessChecker
         {
