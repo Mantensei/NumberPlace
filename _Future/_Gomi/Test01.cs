@@ -1,8 +1,8 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using MantenseiLib; // –Y‚ê‚¸‚ÉI
+using MantenseiLib; // å¿˜ã‚Œãšã«ï¼
 
 public class Test_01 : MonoBehaviour
 {
@@ -10,14 +10,14 @@ public class Test_01 : MonoBehaviour
     {
         int[] array = Enumerable.Range(1, 5).ToArray();
 
-        Debug.Log("--- ƒXƒ^ƒCƒ‹•Ê ---");
-        Debug.Log(array.JoinToString() + "@@:ƒfƒtƒHƒ‹ƒgiƒJƒ“ƒ}‹æØ‚èj");
-        Debug.Log(array.JoinToString(JoinFormat.CommaWrapped) + "@@:Š‡ŒÊ‚Â‚«ƒJƒ“ƒ}");
-        Debug.Log(array.JoinToString(JoinFormat.Space) + "@@:ƒXƒy[ƒX‹æØ‚è");
-        Debug.Log(array.JoinToString(JoinFormat.None) + "@@:‹æØ‚è‚È‚µ");
-        Debug.Log(array.JoinToString(JoinFormat.Line) + "@@:‰üs");
+        Debug.Log("--- ã‚¹ã‚¿ã‚¤ãƒ«åˆ¥ ---");
+        Debug.Log(array.JoinToString() + "ã€€ã€€:ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆï¼ˆã‚«ãƒ³ãƒžåŒºåˆ‡ã‚Šï¼‰");
+        Debug.Log(array.JoinToString(JoinFormat.CommaWrapped) + "ã€€ã€€:æ‹¬å¼§ã¤ãã‚«ãƒ³ãƒž");
+        Debug.Log(array.JoinToString(JoinFormat.Space) + "ã€€ã€€:ã‚¹ãƒšãƒ¼ã‚¹åŒºåˆ‡ã‚Š");
+        Debug.Log(array.JoinToString(JoinFormat.None) + "ã€€ã€€:åŒºåˆ‡ã‚Šãªã—");
+        Debug.Log(array.JoinToString(JoinFormat.Line) + "ã€€ã€€:æ”¹è¡Œ");
 
-        Debug.Log("--- Linq‚Ì“r’†‚Å‚àŒÄ‚×‚éI ---");
+        Debug.Log("--- Linqã®é€”ä¸­ã§ã‚‚å‘¼ã¹ã‚‹ï¼ ---");
         var chain = new []{ 60, 81, 36, 81, 25, 2 }
                           .JoinLog(x => $"{(char)(x + 12354)}", JoinFormat.None)
                           .JoinLog()
