@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 5090621482376690558}
   - component: {fileID: 7314795310930498649}
   - component: {fileID: 6510587048988939454}
+  - component: {fileID: 5089628675299791606}
   m_Layer: 5
   m_Name: _ToolButton_Base
   m_TagString: Untagged
@@ -286,3 +287,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetMarker: {fileID: 0}
   sr: {fileID: 0}
+--- !u!114 &5089628675299791606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5242749926916209447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a394400e5acb97b41b0328367fcb6fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugMode: 0

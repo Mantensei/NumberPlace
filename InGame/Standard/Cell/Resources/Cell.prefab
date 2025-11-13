@@ -724,6 +724,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2751181452320811042}
   - component: {fileID: 950511210296409968}
+  - component: {fileID: 2870453072148830200}
   m_Layer: 0
   m_Name: Cell
   m_TagString: Untagged
@@ -763,6 +764,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetMarker: {fileID: 0}
   sr: {fileID: 0}
+--- !u!114 &2870453072148830200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4797100601199158723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a394400e5acb97b41b0328367fcb6fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugMode: 0
 --- !u!1 &5558320133377229697
 GameObject:
   m_ObjectHideFlags: 0
